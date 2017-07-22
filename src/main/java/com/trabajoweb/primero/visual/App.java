@@ -17,33 +17,42 @@ public class App extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        VerticalLayout layout =new VerticalLayout();
+        HorizontalLayout layout = new HorizontalLayout();
 
-        TextField nombre =new TextField("nombre:");
-        TextField edad =new TextField("edad:");
+        TextField nombre = new TextField("nombre:");
+        TextField puesto = new TextField("puesto:");
+        TextField edad = new TextField("edad:");
+        TextField dpi = new TextField("dpi:");
 
+        VerticalLayout layout1= new VerticalLayout();
         Grid<Estudiante> grid=new Grid<>();
         grid.addColumn(Estudiante::getId).setCaption("id");
         grid.addColumn(Estudiante::getNombre).setCaption("nombre");
+        grid.addColumn(Estudiante::getPuesto).setCaption("puesto");
         grid.addColumn(Estudiante::getEdad).setCaption("edad");
+        grid.addColumn(Estudiante::getDpi).setCaption("dpi");
 
-        Button add=new Button("Agregar");
+        Button add=new Button("Ingresar los datos");
         add.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent clickEvent) {
                 Estudiante uni=new Estudiante();
                 uni.setNombre(nombre.getValue());
+                uni.setPuesto(puesto.getValue());
                 uni.setEdad(Integer.parseInt(edad.getValue()));
+                uni.setDpi(Integer.parseInt(dpi.getValue()));
 
                 estudiantesRepository.save(uni);
                 grid.setItems(estudiantesRepository.findAll());
 
-                Notification.show("Adicionado correctamente");
+                Notification.show("Se ingreso correctamente los datos");
                 nombre.clear();
                 edad.clear();
+                puesto.clear();
+                dpi.clear();
             }
         });
-        layout.addComponents(nombre,edad,add);
+        layout.addComponents(nombre,puesto,edad,dpi,add);
         layout.addComponents(grid);
         setContent(layout);
 

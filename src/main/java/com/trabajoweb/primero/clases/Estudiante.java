@@ -12,6 +12,8 @@ import javax.persistence.Id;
 public class Estudiante {
 
   private String nombre;
+  private String puesto;
+  private int dpi;
   private int edad;
 
 @Id@GeneratedValue (strategy = GenerationType.AUTO)
@@ -21,8 +23,10 @@ public class Estudiante {
 
     }
 
-    public Estudiante(String nombre, int edad, Long id) {
+    public Estudiante(String nombre, int edad,int dpi, String puesto, Long id) {
         this.nombre = nombre;
+        this.puesto = puesto;
+        this.dpi = dpi;
         this.edad = edad;
         this.id = id;
     }
@@ -35,6 +39,10 @@ public class Estudiante {
         this.nombre = nombre;
     }
 
+    public String getPuesto() {return puesto;}
+
+    public void setPuesto(String puesto) {this.puesto = puesto;}
+
     public int getEdad() {
         return edad;
     }
@@ -42,6 +50,10 @@ public class Estudiante {
     public void setEdad(int edad) {
         this.edad = edad;
     }
+
+    public int getDpi() {return dpi;}
+
+    public void setDpi(int dpi) {this.dpi = dpi;}
 
     public Long getId() {
         return id;
